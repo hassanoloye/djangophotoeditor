@@ -5,3 +5,4 @@ cover/
 .coverage
 .coveragerc
 *.pyc
+*.env.yml
