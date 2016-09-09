@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
-    'account'
+    'account',
+    'photos',
 ]
 
 # Use nose to run all tests
@@ -133,6 +134,8 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 STATIC_URL = '/static/'
 
