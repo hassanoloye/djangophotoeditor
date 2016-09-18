@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'account',
     'photos',
+    'api_v1',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_social_auth',
+    'django_nose',
+    'rest_framework_swagger',
 ]
 
 # Use nose to run all tests
@@ -48,6 +54,20 @@ NOSE_ARGS = [
     '--cover-erase',
     '--cover-html',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +86,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Settings for Facebook Authentication
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/photos'
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/photos'
 SOCIAL_AUTH_LOGIN_URL = '/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY')
