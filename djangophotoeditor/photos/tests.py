@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-
-from .models import Folder, Photo
+from photos.models import Folder, Photo
 
 
 class TestFolder(TestCase):
@@ -58,27 +57,27 @@ class PhotoTest(TestCase):
 
         # Create photo
         self.photo = Photo.objects.create(
-            name='Test Photo', image='tmp/sample.jpg',
+            title='Test Photo', image='tmp/sample.jpg',
             folder=self.folder, uploader=self.user)
 
     def test_that_user_can_create_photo(self):
         """Test that users can create a new photo"""
-        photo_path = Photo.objects.get(name='Test Photo').image.path
+        photo_path = Photo.objects.get(title='Test Photo').image.path
 
         # Open the image using the path
         self.failUnless(open(photo_path), 'file not found')
 
         # Assert that the model is saved
-        self.assertTrue(Photo.objects.filter(name='Test Photo'))
+        self.assertTrue(Photo.objects.filter(title='Test Photo'))
 
     def test_that_user_can_update_photo(self):
 
-        self.photo.name = 'Test Photo updated'
+        self.photo.title = 'Test Photo updated'
         self.photo.save()
-        self.assertFalse(Photo.objects.filter(name='Test Photo'))
-        self.assertTrue(Photo.objects.filter(name='Test Photo updated'))
+        self.assertFalse(Photo.objects.filter(title='Test Photo'))
+        self.assertTrue(Photo.objects.filter(title='Test Photo updated'))
 
     def test_that_user_can_delete_photo(self):
 
         self.photo.delete()
-        self.assertFalse(Photo.objects.filter(name='Test Photo'))
+        self.assertFalse(Photo.objects.filter(title='Test Photo'))
