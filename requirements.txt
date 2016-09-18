@@ -1,6 +1,7 @@
 appnope==0.1.0
 backports.shutil-get-terminal-size==1.0.0
 coreapi==2.0.0
+coveralls==1.1
 coverage==4.2
 decorator==4.0.10
 Django==1.9
