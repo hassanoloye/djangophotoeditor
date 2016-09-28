@@ -38,7 +38,8 @@ class Photo(Base):
     image_size = models.IntegerField(default=0)
     uploader = models.ForeignKey(
         User, related_name='photos', on_delete=models.CASCADE)
-    folder = models.ForeignKey(Folder, related_name='photos')
+    folder = models.ForeignKey(
+        Folder, related_name='photos', blank=True, null=True)
 
     def __str__(self):
         return self.title
