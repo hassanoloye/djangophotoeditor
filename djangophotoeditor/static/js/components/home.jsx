@@ -13,10 +13,9 @@ export default class Home extends Component {
 
         render() {
           return(
-            <div>
+            <div className="home-section"> 
             <Menu menustyle={{display:"none"}}
             />
-            <ImageSlider />
             <Login />
             </div>
           );
