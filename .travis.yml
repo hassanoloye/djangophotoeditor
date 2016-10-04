@@ -10,3 +10,13 @@ script:
 
 after_success:
   - coveralls
+
+deploy:
+  provider: heroku
+  buildpack: python
+  api_key:
+    secure: 94cd9b29-bde1-44f9-b7af-d8f149c2cff7
+  strategy: git
+  app: photoedits
+  on: develop
+  run: "rake db:migrate"
