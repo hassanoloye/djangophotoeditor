@@ -3,6 +3,7 @@ backports.shutil-get-terminal-size==1.0.0
 coreapi==2.0.0
 coverage==4.2
 decorator==4.0.10
+dj-database-url==0.4.1
 Django==1.9
 django-braces==1.9.0
 django-envie==0.0.9
@@ -12,6 +13,7 @@ django-rest-framework-social-oauth2==1.0.4
 django-rest-swagger==0.3.5
 djangorestframework==3.4.6
 enum34==1.1.6
+gunicorn==19.6.0
 ipython==5.1.0
 ipython-genutils==0.1.0
 itypes==1.1.0
