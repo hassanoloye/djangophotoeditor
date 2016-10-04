@@ -41,7 +41,6 @@ export default class Login extends Component {
     FB.login(function(response){
       if (response.status === 'connected') {
         var fbAccessToken = response.authResponse.accessToken;
-        console.log("userID:  "+ response.authResponse.userID);
         this.getUserUsername(fbAccessToken)
         this.setAuthenticationToken(fbAccessToken);
       }
@@ -54,8 +53,8 @@ export default class Login extends Component {
        .type('form')
        .send({grant_type: 'convert_token',
             token: fbAccessToken,
-            client_id: 'ZovH9a9Tot4PhxCFlzGZF2Wt8OYbOsulnltKdO6x',
-            client_secret: 'SuQlz4hK8gHBigeO1jkCmQGbb5uvpYc8soG0OQfhQkeJnwQDWAGuNbwNGQ4dndfYJMUfov5dzEKygL6Kf9GC2YUyGTUjjcdXIQehplvW2hfgtnYqpy7Dtcs8c7lMZouG',
+            client_id: 'wiDWuTqTgnf0wsHWhmyw9unnjQIpMFwg1BHS180x',
+            client_secret: '66SdZQV0aVZFl6WRQO0o6SO0mhNaJP1x7bjDmv8qscUbbs50aHxSAwfwkLROK17a9zDlufZQuN5cR4rjJX1zP2j816fhr0ZgPzGET63JTJm9lALW4M8Ma9DrRNWyO1xf',
             backend: 'facebook'
           })
        .end((err, result) => {
@@ -73,9 +72,8 @@ export default class Login extends Component {
   }
 
   getUserUsername(fbAccessToken) {
-    console.log("Fetching username")
     request
-     .get('https://graph.facebook.com/v2.7/1234977009885803/?access_token='+'1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo')
+     .get('https://graph.facebook.com/v2.7/1234977009885803/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo')
      .type('form')
      .end((err, result) => {
        if (result.status === 200) {
