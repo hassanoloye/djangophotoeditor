@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import request from 'superagent';
 
 export default class Login extends Component {
-
-
   constructor() {
     super();
     this.loginWithFacebook = this.loginWithFacebook.bind(this);
@@ -50,19 +48,17 @@ export default class Login extends Component {
     setAuthenticationToken (fbAccessToken) {
       request
        .post('api/v1/auth/convert-token/')
-       .type('form')
        .send({grant_type: 'convert_token',
             token: fbAccessToken,
-            client_id: 'wiDWuTqTgnf0wsHWhmyw9unnjQIpMFwg1BHS180x',
-            client_secret: '66SdZQV0aVZFl6WRQO0o6SO0mhNaJP1x7bjDmv8qscUbbs50aHxSAwfwkLROK17a9zDlufZQuN5cR4rjJX1zP2j816fhr0ZgPzGET63JTJm9lALW4M8Ma9DrRNWyO1xf',
+            client_id: 'H4LvS3PFO119U8R0k650NlIjhnsAWfhfyrykyjPE',
+            client_secret: 'dlfkqHwGaPw4Flqjl7QinphcTlpi1svS8237mFY64ljs3piYZp9xiYHSMJyZjAHSLpgAiyTmSrfrzMDuyuCZjXVtkwUEurfhSS0EcieHnkr26OErTZegVWMlXGfRMjEB',
             backend: 'facebook'
           })
        .end((err, result) => {
-         console.log(result)
         if (result.status == 200) {
           localStorage.setItem('token', result.body.access_token);
-          localStorage.setItem('isAuthenticated', true)
-          return this.redirectToDashboard()
+          localStorage.setItem('isAuthenticated', true);
+          return this.redirectToDashboard();
           }
        });
     }
@@ -74,7 +70,6 @@ export default class Login extends Component {
   getUserUsername(fbAccessToken) {
     request
      .get('https://graph.facebook.com/v2.7/1234977009885803/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo')
-     .type('form')
      .end((err, result) => {
        if (result.status === 200) {
          localStorage.setItem('username', result.body.name)
