@@ -6,24 +6,42 @@ import {
     NavItem,
     NavDropdown,
 } from 'react-bootstrap';
+import Notifications from 'react-notify-toast';
 
-const Menu = (props) => {
-  return (
-    <Navbar staticTop={true}>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <a href="#">PhotoEditor</a>
-        </Navbar.Brand>
-      </Navbar.Header>
-      <div style={props.menustyle}>
-        <Nav pullRight>
-          <NavDropdown eventKey={3} title={props.username || ""} id="basic-nav-dropdown">
-            <MenuItem onClick={props.handleLogout} eventKey={3.1}>Logout</MenuItem>
-          </NavDropdown>
-        </Nav>
-        </div>
-    </Navbar>
-      );
-}
+export default class Menu extends Component {
+    constructor() {
+    super();
+    this.handleLogout = this.handleLogout.bind(this);
+  }
 
-module.exports = Menu;
+  handleLogout() {
+    localStorage.clear();
+    this.context.router.push('/');
+  }
+
+  render() {
+    return (
+      <div>
+      <Navbar staticTop={true}>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/dashboard">PhotoEditor</a>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <div style={this.props.menustyle}>
+          <Nav pullRight>
+            <NavDropdown eventKey={1} title={this.props.username || ""} id="basic-nav-dropdown">
+              <MenuItem onClick={this.handleLogout} eventKey={1.1}>Logout</MenuItem>
+            </NavDropdown>
+          </Nav>
+          </div>
+      </Navbar>
+      </div>
+        );
+    }
+  }
+
+
+Menu.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

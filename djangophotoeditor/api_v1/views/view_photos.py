@@ -26,20 +26,11 @@ class PhotoView(generics.ListCreateAPIView):
         Save image uploader as current user
         """
 
-        # Create an Uncategorized folder for user if it doesn't exist and get
-        # it if it does
-        if not Folder.objects.filter(name='Uncategorized',
-                                     owner=self.request.user):
-            folder = Folder.objects.create(name='Uncategorized',
-                                           owner=self.request.user)
-        else:
-            folder = Folder.objects.get(name='Uncategorized',
-                                        owner=self.request.user)
         image = self.request.FILES.get('image')
         if not image:
             raise ParseError(detail="Please select a valid image")
 
-        serializer.save(uploader=self.request.user, folder=folder)
+        serializer.save(uploader=self.request.user, folder=None)
 
     def get_queryset(self):
         """Returns all photos for a particular user only"""
@@ -64,6 +55,9 @@ class FolderPhotoView(generics.CreateAPIView):
         Overrides the default perform_create method
         Save current user as image uploader
         """
+        image = self.request.FILES.get('image')
+        if not image:
+            raise ParseError(detail="Please select a valid image")
         serializer.save(uploader=self.request.user, folder=folder)
 
 

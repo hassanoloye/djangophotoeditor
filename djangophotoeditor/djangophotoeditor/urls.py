@@ -16,10 +16,12 @@ Including another URLconf
 import account.urls
 import api_v1.urls
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
+from djangophotoeditor import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(account.urls)),
     url(r'^api/v1/', include(api_v1.urls))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

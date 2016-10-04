@@ -4,7 +4,8 @@ from django.conf.urls import include, url
 urlpatterns = [
     url(r'^auth/login$', view_users.LoginView.as_view(), name='apilogin'),
     url(r'^auth/register$', view_users.RegisterView.as_view(), name='apiregister'),
-    url(r'^auth/login/', include('rest_social_auth.urls_token')),
+    #url(r'^auth/', include('rest_social_auth.urls_token')),
+    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^photo/$', view_photos.PhotoView.as_view(),
         name='photo_api'),
     url(r'^photo/(?P<pk>[0-9]+)$',
