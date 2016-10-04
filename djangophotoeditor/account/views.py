@@ -8,3 +8,11 @@ class IndexView(TemplateView):
 
 class PhotosView(TemplateView):
     template_name = 'account/photo.html'
+
+
+class DashboardView(TemplateView):
+    template_name = 'account/photo.html'
+
+
+class FolderView(TemplateView):
+    template_name = 'account/photo.html'

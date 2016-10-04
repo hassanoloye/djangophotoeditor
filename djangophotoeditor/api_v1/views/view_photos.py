@@ -55,6 +55,9 @@ class FolderPhotoView(generics.CreateAPIView):
         Overrides the default perform_create method
         Save current user as image uploader
         """
+        image = self.request.FILES.get('image')
+        if not image:
+            raise ParseError(detail="Please select a valid image")
         serializer.save(uploader=self.request.user, folder=folder)
 
 

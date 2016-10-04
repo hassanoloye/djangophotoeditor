@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_social_auth',
     'django_nose',
     'rest_framework_swagger',
+    'oauth2_provider',
+    'rest_framework_social_oauth2',
 ]
 
 # Use nose to run all tests
@@ -62,6 +64,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -83,6 +87,7 @@ MIDDLEWARE_CLASSES = [
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
 )
 
 # Settings for Facebook Authentication
@@ -156,6 +161,8 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+MEDIA_URL = '/uploads/'
 
 STATIC_URL = '/static/'
 
