@@ -1,12 +1,14 @@
 appnope==0.1.0
 backports.shutil-get-terminal-size==1.0.0
 coreapi==2.0.0
-coveralls==1.1
 coverage==4.2
 decorator==4.0.10
 Django==1.9
+django-braces==1.9.0
 django-envie==0.0.9
 django-nose==1.4.4
+django-oauth-toolkit==0.10.0
+django-rest-framework-social-oauth2==1.0.4
 django-rest-swagger==0.3.5
 djangorestframework==3.4.6
 enum34==1.1.6
@@ -14,7 +16,7 @@ ipython==5.1.0
 ipython-genutils==0.1.0
 itypes==1.1.0
 nose==1.3.7
-oauthlib==2.0.0
+oauthlib==1.0.3
 openapi-codec==1.0.0
 pathlib2==2.1.0
 pexpect==4.2.1
