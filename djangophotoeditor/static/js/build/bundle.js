@@ -70554,7 +70554,6 @@
 	  _createClass(Login, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-
 	      (function (d, s, id) {
 	        var js,
 	            fjs = d.getElementsByTagName(s)[0];
@@ -70581,9 +70580,8 @@
 	      event.preventDefault();
 	      FB.login(function (response) {
 	        if (response.status === 'connected') {
-	          var fbAccessToken = response.authResponse.accessToken;
-	          this.getUserUsername(fbAccessToken);
-	          this.setAuthenticationToken(fbAccessToken);
+	          this.getUserUsername(response.authResponse.userID);
+	          this.setAuthenticationToken(response.authResponse.accessToken);
 	        }
 	      }.bind(this));
 	    }
@@ -70592,6 +70590,7 @@
 	    value: function setAuthenticationToken(fbAccessToken) {
 	      var _this2 = this;
 
+	      console.log(fbAccessToken);
 	      _superagent2.default.post('api/v1/auth/convert-token/').send({ grant_type: 'convert_token',
 	        token: fbAccessToken,
 	        client_id: 'H4LvS3PFO119U8R0k650NlIjhnsAWfhfyrykyjPE',
@@ -70612,8 +70611,8 @@
 	    }
 	  }, {
 	    key: 'getUserUsername',
-	    value: function getUserUsername(fbAccessToken) {
-	      _superagent2.default.get('https://graph.facebook.com/v2.7/1234977009885803/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo').end(function (err, result) {
+	    value: function getUserUsername(userID) {
+	      _superagent2.default.get('https://graph.facebook.com/v2.7/' + userID + '/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo').end(function (err, result) {
 	        if (result.status === 200) {
 	          localStorage.setItem('username', result.body.name);
 	        }

@@ -87,18 +87,19 @@ class PhotoDetailView(generics.RetrieveUpdateDestroyAPIView):
             pk=photo_id,
             uploader=self.request.user).first()
         image = photo.image
-        title = serializer.validated_data.get('title')
 
         filters = self.request.data.get('filters')
         edited_image = ImageEditor(image, filters).apply_filters()
 
         filename, file_format = os.path.splitext(image.name)
-        edited_image_path = '{}_edited{}'.format(filename, file_format)
-        edited_image.save('uploads/{}'.format(edited_image_path))
+        edited_image_url = '{}_edited{}'.format(filename, file_format)
+        edited_image_path = '{}/{}'.format(
+            settings.MEDIA_ROOT, edited_image_url)
+        edited_image.save(edited_image_path)
 
         instance = serializer.save()
         instance.title = serializer.validated_data.get('title')
-        instance.edited_image = edited_image_path
+        instance.edited_image = edited_image_url
         if self.request.data.get('save'):
-            edited_image.save('uploads/{}'.format(image.name))
+            edited_image.save('{}/{}'.format(settings.MEDIA_ROOT, image.name))
             instance.save()
