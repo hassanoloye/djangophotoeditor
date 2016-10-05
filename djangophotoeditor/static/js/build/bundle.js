@@ -70592,13 +70592,12 @@
 	    value: function setAuthenticationToken(fbAccessToken) {
 	      var _this2 = this;
 
-	      _superagent2.default.post('api/v1/auth/convert-token/').type('form').send({ grant_type: 'convert_token',
+	      _superagent2.default.post('api/v1/auth/convert-token/').send({ grant_type: 'convert_token',
 	        token: fbAccessToken,
-	        client_id: 'wiDWuTqTgnf0wsHWhmyw9unnjQIpMFwg1BHS180x',
-	        client_secret: '66SdZQV0aVZFl6WRQO0o6SO0mhNaJP1x7bjDmv8qscUbbs50aHxSAwfwkLROK17a9zDlufZQuN5cR4rjJX1zP2j816fhr0ZgPzGET63JTJm9lALW4M8Ma9DrRNWyO1xf',
+	        client_id: 'H4LvS3PFO119U8R0k650NlIjhnsAWfhfyrykyjPE',
+	        client_secret: 'dlfkqHwGaPw4Flqjl7QinphcTlpi1svS8237mFY64ljs3piYZp9xiYHSMJyZjAHSLpgAiyTmSrfrzMDuyuCZjXVtkwUEurfhSS0EcieHnkr26OErTZegVWMlXGfRMjEB',
 	        backend: 'facebook'
 	      }).end(function (err, result) {
-	        console.log(result);
 	        if (result.status == 200) {
 	          localStorage.setItem('token', result.body.access_token);
 	          localStorage.setItem('isAuthenticated', true);
@@ -70614,7 +70613,7 @@
 	  }, {
 	    key: 'getUserUsername',
 	    value: function getUserUsername(fbAccessToken) {
-	      _superagent2.default.get('https://graph.facebook.com/v2.7/1234977009885803/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo').type('form').end(function (err, result) {
+	      _superagent2.default.get('https://graph.facebook.com/v2.7/1234977009885803/?access_token=1516688595023754|zCeQIjzrRPA_xhTNKv8iUW3ilbo').end(function (err, result) {
 	        if (result.status === 200) {
 	          localStorage.setItem('username', result.body.name);
 	        }
