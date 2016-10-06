@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^', include(account.urls)),
     url(r'^api/v1/', include(api_v1.urls)),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.STATIC_ROOT})
+        {'document_root': settings.STATIC_ROOT}),
+    url(r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT})
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT)
