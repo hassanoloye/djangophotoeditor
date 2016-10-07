@@ -143,9 +143,9 @@ export default class Photo extends Component {
         method: 'share',
         name: 'Edit photos',
         href: location.protocol + '//' + location.host + '/photo/' + photo.id,
-        caption: 'Photo Editor, Edit your photos!!!',
+        caption: 'Bring your photos to life with Photo Editor!!!',
         picture: photo.image,
-        description: 'Work those Filters.'
+        description: 'Apply Filters.'
       });
     }
 
