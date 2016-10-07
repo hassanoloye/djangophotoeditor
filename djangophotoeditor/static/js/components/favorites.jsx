@@ -85,12 +85,12 @@ export default class Favorites extends Component {
       <ListGroup>
       <ListGroupItem>
       <a onClick={this.redirectToFolderDashboard} className="glyphicon glyphicon-folder-close">
-         All Folders
+         {' '}All Folders
          </a>
          </ListGroupItem>
          <ListGroupItem>
          <a onClick={this.redirectToPhotoDashboard} className="glyphicon glyphicon-picture">
-            All Photos
+            {' '}All Photos
             </a>
             </ListGroupItem>
       </ListGroup>

@@ -7,7 +7,7 @@ http://www.tooplate.com/view/2075-digital-team
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     position: relative;
-    background: url('/static/img/img1.png') no-repeat center center fixed;
+    background: url('/static/img/img2.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -15,6 +15,13 @@ http://www.tooplate.com/view/2075-digital-team
     height: 725px;
   }
 
+.app-caption {
+  font-family: cursive;
+  font-size: 3em;
+  margin: 1em auto;
+  margin-top: -2em;
+  color: #0097A7;
+}
 
 html, body {
      width: 100%;
@@ -421,6 +428,10 @@ textarea {
 
 .new-folder-picture {
     margin-left: 40px;
+}
+
+.new-folder-picture a {
+  color: rgb(35, 19, 19);
 }
 
 .select-folder-photo {
