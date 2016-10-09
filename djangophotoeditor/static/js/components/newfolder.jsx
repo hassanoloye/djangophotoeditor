@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import request from 'superagent';
-import Folder from './folder.jsx';
 import FolderModal from './modals/foldermodal.jsx';
-import NotifyAlert from './notifyalert.jsx';
 
 export default class NewFolder extends Component {
     constructor() {

@@ -1,19 +1,18 @@
 import os
 
 from api_v1.filters import ImageEditor
-from api_v1.permissions import IsFolderOwner, IsPhotoFolderOwner, IsPhotoOwner
+from api_v1.permissions import IsPhotoFolderOwner, IsPhotoOwner
 from api_v1.serializers import PhotoSerializer
-from django.core.files import File
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from djangophotoeditor import settings
+from djangophotoeditor.settings import MEDIA_ROOT
 from photos.models import Folder, Photo
-from rest_framework import generics
 from rest_framework.exceptions import ParseError
+from rest_framework.generics import (CreateAPIView, ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView)
 from rest_framework.permissions import IsAuthenticated
 
 
-class PhotoView(generics.ListCreateAPIView):
+class PhotoView(ListCreateAPIView):
     """
     Get all photos, or create a new photo without folder.
     """
@@ -28,7 +27,7 @@ class PhotoView(generics.ListCreateAPIView):
 
         image = self.request.FILES.get('image')
         if not image:
-            raise ParseError(detail="Please select a valid image")
+            raise ParseError(detail="Please upload a valid image")
 
         serializer.save(uploader=self.request.user, folder=None)
 
@@ -37,7 +36,7 @@ class PhotoView(generics.ListCreateAPIView):
         return Photo.objects.filter(uploader=self.request.user)
 
 
-class FolderPhotoView(generics.CreateAPIView):
+class FolderPhotoView(CreateAPIView):
     """
     Create a new photo in a folder.
     """
@@ -57,11 +56,11 @@ class FolderPhotoView(generics.CreateAPIView):
         """
         image = self.request.FILES.get('image')
         if not image:
-            raise ParseError(detail="Please select a valid image")
+            raise ParseError(detail="Please upload a valid image")
         serializer.save(uploader=self.request.user, folder=folder)
 
 
-class PhotoDetailView(generics.RetrieveUpdateDestroyAPIView):
+class PhotoDetailView(RetrieveUpdateDestroyAPIView):
     """
     Retrieve, Update or delete a photo
     """
@@ -75,7 +74,7 @@ class PhotoDetailView(generics.RetrieveUpdateDestroyAPIView):
             os.remove(instance.image.path)
         if instance.edited_image:
             edited_image_path = os.path.join(
-                settings.MEDIA_ROOT, instance.edited_image)
+                MEDIA_ROOT, instance.edited_image)
             if os.path.exists(edited_image_path):
                 os.remove(edited_image_path)
         instance.delete()
@@ -88,18 +87,18 @@ class PhotoDetailView(generics.RetrieveUpdateDestroyAPIView):
             uploader=self.request.user).first()
         image = photo.image
 
-        filters = self.request.data.get('filters')
+        filters = self.request.data.get('filters', '')
         edited_image = ImageEditor(image, filters).apply_filters()
 
         filename, file_format = os.path.splitext(image.name)
         edited_image_url = '{}_edited{}'.format(filename, file_format)
         edited_image_path = '{}/{}'.format(
-            settings.MEDIA_ROOT, edited_image_url)
+            MEDIA_ROOT, edited_image_url)
         edited_image.save(edited_image_path)
 
         instance = serializer.save()
         instance.title = serializer.validated_data.get('title')
         instance.edited_image = edited_image_url
         if self.request.data.get('save'):
-            edited_image.save('{}/{}'.format(settings.MEDIA_ROOT, image.name))
+            edited_image.save('{}/{}'.format(MEDIA_ROOT, image.name))
             instance.save()

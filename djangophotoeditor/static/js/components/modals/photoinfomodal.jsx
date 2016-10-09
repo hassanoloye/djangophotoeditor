@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, FormControl, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 export default class PhotoInfoModal extends Component{
   constructor() {

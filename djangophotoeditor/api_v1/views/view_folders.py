@@ -1,12 +1,13 @@
 from api_v1.permissions import IsFolderOwner
-from api_v1.serializers import FolderSerializer, PhotoSerializer
-from photos.models import Folder, Photo
-from rest_framework import generics
+from api_v1.serializers import FolderSerializer
+from photos.models import Folder
 from rest_framework.exceptions import ParseError
+from rest_framework.generics import (ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView)
 from rest_framework.permissions import IsAuthenticated
 
 
-class FolderView(generics.ListCreateAPIView):
+class FolderView(ListCreateAPIView):
     """
     Create a new folder.
     """
@@ -30,7 +31,7 @@ class FolderView(generics.ListCreateAPIView):
         return Folder.objects.filter(owner=self.request.user)
 
 
-class FolderDetailView (generics.RetrieveUpdateDestroyAPIView):
+class FolderDetailView (RetrieveUpdateDestroyAPIView):
     """
     Retrieves, Update or delete a folder
     """

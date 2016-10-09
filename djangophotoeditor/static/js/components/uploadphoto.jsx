@@ -31,7 +31,3 @@ export default class UploadPhoto extends Component {
       );
     }
 }
-
-UploadPhoto.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};

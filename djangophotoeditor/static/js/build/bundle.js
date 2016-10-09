@@ -27149,10 +27149,6 @@
 
 	var _favorites2 = _interopRequireDefault(_favorites);
 
-	var _foldermodal = __webpack_require__(661);
-
-	var _foldermodal2 = _interopRequireDefault(_foldermodal);
-
 	var _folder = __webpack_require__(655);
 
 	var _folder2 = _interopRequireDefault(_folder);
@@ -27294,15 +27290,6 @@
 	          folderPaginationCount: this.state.folderPaginationCount,
 	          fetchFoldersByPage: this.fetchFoldersByPage,
 	          displayFlashMessage: this.displayFlashMessage
-	        }),
-	        _react2.default.createElement(_foldermodal2.default, {
-	          show: this.state.showNewFolderForm,
-	          onHide: closeNewFolderForm,
-	          handleFieldChange: this.handleFieldChange,
-	          onSave: this.handleSaveNewFolder,
-	          formName: 'newFolderName',
-	          formtitle: 'Add Folder',
-	          placeholder: 'Enter folder name'
 	        })
 	      );
 	    }
@@ -27378,7 +27365,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'a',
-	                { href: '/dashboard' },
+	                { href: '/dashboard/folders' },
 	                'PhotoEditor'
 	              )
 	            )
@@ -67474,22 +67461,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _menu = __webpack_require__(237);
-
-	var _menu2 = _interopRequireDefault(_menu);
-
-	var _superagent = __webpack_require__(648);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var _folder = __webpack_require__(655);
-
-	var _folder2 = _interopRequireDefault(_folder);
-
-	var _photo = __webpack_require__(658);
-
-	var _photo2 = _interopRequireDefault(_photo);
-
 	var _reactBootstrap = __webpack_require__(238);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67510,15 +67481,7 @@
 
 	    _this.redirectToFolderDashboard = _this.redirectToFolderDashboard.bind(_this);
 	    _this.redirectToPhotoDashboard = _this.redirectToPhotoDashboard.bind(_this);
-	    _this.state = {
-	      newFolderName: '',
-	      showNewFolderForm: false,
-	      activeKey: 1,
-	      folders: [],
-	      photos: [],
-	      folderPaginationCount: 0,
-	      photoPaginationCount: 0
-	    };
+	    _this.state = {};
 	    return _this;
 	  }
 
@@ -67600,14 +67563,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(98);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _menu = __webpack_require__(237);
-
-	var _menu2 = _interopRequireDefault(_menu);
 
 	var _superagent = __webpack_require__(648);
 
@@ -68173,10 +68128,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _menu = __webpack_require__(237);
-
-	var _menu2 = _interopRequireDefault(_menu);
-
 	var _superagent = __webpack_require__(648);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
@@ -68697,8 +68648,6 @@
 	    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
 	    _this.displayFlashMessage = _this.displayFlashMessage.bind(_this);
 	    _this.state = {
-	      done: false,
-	      question: true,
 	      flashMessage: '',
 	      filters: [],
 	      isEdited: false,
@@ -69182,12 +69131,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -69202,56 +69145,27 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NewFolderPicture = function (_Component) {
-	  _inherits(NewFolderPicture, _Component);
-
-	  function NewFolderPicture() {
-	    _classCallCheck(this, NewFolderPicture);
-
-	    var _this = _possibleConstructorReturn(this, (NewFolderPicture.__proto__ || Object.getPrototypeOf(NewFolderPicture)).call(this));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(NewFolderPicture, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
+	var NewFolderPicture = function NewFolderPicture(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'row' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'col-lg-3 col-md-3 col-sm-4' },
+	      _react2.default.createElement(
 	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-lg-3 col-md-3 col-sm-4' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'new-folder-picture' },
-	            _react2.default.createElement(_newfolder2.default, {
-	              fetchFolders: this.props.fetchFolders,
-	              displayFlashMessage: this.props.displayFlashMessage }),
-	            _react2.default.createElement(_uploadphoto2.default, { fetchAllPhotos: this.props.fetchAllPhotos }),
-	            _react2.default.createElement('hr', null)
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return NewFolderPicture;
-	}(_react.Component);
-
-	exports.default = NewFolderPicture;
-
-
-	_newfolder2.default.contextTypes = {
-	  router: _react2.default.PropTypes.object.isRequired
+	        { className: 'new-folder-picture' },
+	        _react2.default.createElement(_newfolder2.default, {
+	          fetchFolders: props.fetchFolders,
+	          displayFlashMessage: props.displayFlashMessage }),
+	        _react2.default.createElement(_uploadphoto2.default, { fetchAllPhotos: props.fetchAllPhotos }),
+	        _react2.default.createElement('hr', null)
+	      )
+	    )
+	  );
 	};
+
+	module.exports = NewFolderPicture;
 
 /***/ },
 /* 663 */
@@ -69269,25 +69183,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(98);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
 	var _superagent = __webpack_require__(648);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _folder = __webpack_require__(655);
-
-	var _folder2 = _interopRequireDefault(_folder);
-
 	var _foldermodal = __webpack_require__(661);
 
 	var _foldermodal2 = _interopRequireDefault(_foldermodal);
-
-	var _notifyalert = __webpack_require__(664);
-
-	var _notifyalert2 = _interopRequireDefault(_notifyalert);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69402,12 +69304,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -69416,59 +69312,31 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NotifyAlert = function (_Component) {
-	  _inherits(NotifyAlert, _Component);
-
-	  function NotifyAlert() {
-	    _classCallCheck(this, NotifyAlert);
-
-	    var _this = _possibleConstructorReturn(this, (NotifyAlert.__proto__ || Object.getPrototypeOf(NotifyAlert)).call(this));
-
-	    _this.state = {
-	      showNotification: false,
-	      notificationMessage: '',
-	      messageType: 'success'
-	    };
-	    return _this;
-	  }
-
-	  _createClass(NotifyAlert, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
+	var NotifyAlert = function NotifyAlert(props) {
+	    return _react2.default.createElement(
 	        'div',
 	        { className: 'notify-message' },
 	        _react2.default.createElement(
-	          _reactBootstrap.Grid,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.Row,
+	            _reactBootstrap.Grid,
 	            null,
 	            _react2.default.createElement(
-	              _reactBootstrap.Col,
-	              { sm: 12, md: 9 },
-	              this.props.showNotification ? _react2.default.createElement(
-	                _reactBootstrap.Alert,
-	                { bsStyle: this.props.messageType },
-	                this.props.flashMessage
-	              ) : null
+	                _reactBootstrap.Row,
+	                null,
+	                _react2.default.createElement(
+	                    _reactBootstrap.Col,
+	                    { sm: 12, md: 9 },
+	                    props.showNotification ? _react2.default.createElement(
+	                        _reactBootstrap.Alert,
+	                        { bsStyle: props.messageType },
+	                        props.flashMessage
+	                    ) : null
+	                )
 	            )
-	          )
 	        )
-	      );
-	    }
-	  }]);
+	    );
+	};
 
-	  return NotifyAlert;
-	}(_react.Component);
-
-	exports.default = NotifyAlert;
+	module.exports = NotifyAlert;
 
 /***/ },
 /* 665 */
@@ -69550,11 +69418,6 @@
 	}(_react.Component);
 
 	exports.default = UploadPhoto;
-
-
-	UploadPhoto.contextTypes = {
-	  router: _react2.default.PropTypes.object.isRequired
-	};
 
 /***/ },
 /* 666 */
@@ -70280,10 +70143,6 @@
 
 	var _favorites2 = _interopRequireDefault(_favorites);
 
-	var _foldermodal = __webpack_require__(661);
-
-	var _foldermodal2 = _interopRequireDefault(_foldermodal);
-
 	var _photo = __webpack_require__(658);
 
 	var _photo2 = _interopRequireDefault(_photo);
@@ -70425,15 +70284,6 @@
 	          fetchPhotosByPage: this.fetchPhotosByPage,
 	          fetchAllPhotos: this.fetchAllPhotos,
 	          displayFlashMessage: this.displayFlashMessage
-	        }),
-	        _react2.default.createElement(_foldermodal2.default, {
-	          show: this.state.showNewFolderForm,
-	          onHide: closeNewFolderForm,
-	          handleFieldChange: this.handleFieldChange,
-	          onSave: this.handleSaveNewFolder,
-	          formName: 'newFolderName',
-	          formtitle: 'Add Folder',
-	          placeholder: 'Enter folder name'
 	        })
 	      );
 	    }

@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
 from photos.models import Folder
-from rest_framework import permissions
+from rest_framework.permissions import BasePermission
 
 
-class IsFolderOwner(permissions.BasePermission):
+class IsFolderOwner(BasePermission):
     """
     Permission only allow owners of object access to it
     """
@@ -13,7 +13,7 @@ class IsFolderOwner(permissions.BasePermission):
         return obj.owner == request.user
 
 
-class IsPhotoOwner(permissions.BasePermission):
+class IsPhotoOwner(BasePermission):
     """
     Permission only allow owners of object access to it
     """
@@ -23,7 +23,7 @@ class IsPhotoOwner(permissions.BasePermission):
         return obj.uploader == request.user
 
 
-class IsPhotoFolderOwner(permissions.BasePermission):
+class IsPhotoFolderOwner(BasePermission):
     """
     Permission only allow owners of folders access to it
     """
