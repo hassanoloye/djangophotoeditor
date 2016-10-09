@@ -50,13 +50,15 @@ export default class PhotoDashboard extends Component {
       .set('Authorization', 'Bearer ' + localStorage
             .getItem('token'))
       .end((err, result) => {
-        if (result.status === 200) {
-          var count = result.body.count
-          var countValue =  (count % 10 === 0) ? count/10 : Math.floor(count/10) + 1
-          this.setState({
-            photos: result.body.results,
-            photoPaginationCount: countValue
-          });
+        if (result) {
+          if (result.status === 200) {
+            let count = result.body.count
+            let countValue =  (count % 10 === 0) ? count/10 : Math.floor(count/10) + 1
+            this.setState({
+              photos: result.body.results,
+              photoPaginationCount: countValue
+            });
+          }
         }
       });
   }
@@ -67,13 +69,15 @@ export default class PhotoDashboard extends Component {
       .set('Authorization', 'Bearer ' + localStorage
             .getItem('token'))
       .end((err, result) => {
-        if (result.status === 200) {
-          var count = result.body.count
-          var countValue =  (count % 10 === 0) ? count/10 : Math.floor(count/10) + 1
-          this.setState({
-            folders: result.body.results,
-            folderPaginationCount: countValue
-          });
+        if(result) {
+          if (result.status === 200) {
+            let count = result.body.count
+            let countValue =  (count % 10 === 0) ? count/10 : Math.floor(count/10) + 1
+            this.setState({
+              folders: result.body.results,
+              folderPaginationCount: countValue
+            });
+          }
         }
       });
   }

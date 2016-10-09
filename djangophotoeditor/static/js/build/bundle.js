@@ -27210,10 +27210,12 @@
 	      var _this2 = this;
 
 	      _superagent2.default.get('/api/v1/folder/?page=' + page).set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          _this2.setState({
-	            folders: result.body.results
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            _this2.setState({
+	              folders: result.body.results
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -27223,13 +27225,15 @@
 	      var _this3 = this;
 
 	      _superagent2.default.get('/api/v1/photo/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this3.setState({
-	            photos: result.body.results,
-	            photoPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this3.setState({
+	              photos: result.body.results,
+	              photoPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -27239,13 +27243,15 @@
 	      var _this4 = this;
 
 	      _superagent2.default.get('/api/v1/folder/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this4.setState({
-	            folders: result.body.results,
-	            folderPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this4.setState({
+	              folders: result.body.results,
+	              folderPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -67641,21 +67647,20 @@
 	      this.fetchFolders();
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {}
-	  }, {
 	    key: 'fetchFolders',
 	    value: function fetchFolders() {
 	      var _this2 = this;
 
 	      _superagent2.default.get('/api/v1/folder/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this2.setState({
-	            folders: result.body.results,
-	            folderPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this2.setState({
+	              folders: result.body.results,
+	              folderPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -68481,8 +68486,6 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
@@ -68598,7 +68601,6 @@
 	  }, {
 	    key: 'sendPhotoToApi',
 	    value: function sendPhotoToApi(folderId, image, title) {
-	      console.log(typeof folderId === 'undefined' ? 'undefined' : _typeof(folderId), folderId);
 	      var url = '/api/v1/photo/';
 	      if (folderId != '0') {
 	        url = '/api/v1/folder/' + folderId + '/photos';
@@ -69305,13 +69307,15 @@
 	      var _this3 = this;
 
 	      _superagent2.default.get('/api/v1/photo/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this3.setState({
-	            photos: result.body.results,
-	            photoPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this3.setState({
+	              photos: result.body.results,
+	              photoPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -69321,13 +69325,15 @@
 	      var _this4 = this;
 
 	      _superagent2.default.get('/api/v1/folder/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this4.setState({
-	            folders: result.body.results,
-	            folderPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this4.setState({
+	              folders: result.body.results,
+	              folderPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -69493,13 +69499,15 @@
 	      var _this2 = this;
 
 	      _superagent2.default.get('/api/v1/photo/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this2.setState({
-	            photos: result.body.results,
-	            photoPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this2.setState({
+	              photos: result.body.results,
+	              photoPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -70413,7 +70421,6 @@
 	    value: function setAuthenticationToken(fbAccessToken) {
 	      var _this2 = this;
 
-	      console.log(fbAccessToken);
 	      _superagent2.default.post('api/v1/auth/convert-token/').send({ grant_type: 'convert_token',
 	        token: fbAccessToken,
 	        client_id: 'H4LvS3PFO119U8R0k650NlIjhnsAWfhfyrykyjPE',
@@ -70588,13 +70595,15 @@
 	      var _this3 = this;
 
 	      _superagent2.default.get('/api/v1/photo/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this3.setState({
-	            photos: result.body.results,
-	            photoPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this3.setState({
+	              photos: result.body.results,
+	              photoPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
@@ -70604,13 +70613,15 @@
 	      var _this4 = this;
 
 	      _superagent2.default.get('/api/v1/folder/').set('Authorization', 'Bearer ' + localStorage.getItem('token')).end(function (err, result) {
-	        if (result.status === 200) {
-	          var count = result.body.count;
-	          var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
-	          _this4.setState({
-	            folders: result.body.results,
-	            folderPaginationCount: countValue
-	          });
+	        if (result) {
+	          if (result.status === 200) {
+	            var count = result.body.count;
+	            var countValue = count % 10 === 0 ? count / 10 : Math.floor(count / 10) + 1;
+	            _this4.setState({
+	              folders: result.body.results,
+	              folderPaginationCount: countValue
+	            });
+	          }
 	        }
 	      });
 	    }
