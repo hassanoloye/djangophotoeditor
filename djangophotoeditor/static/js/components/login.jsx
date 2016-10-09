@@ -63,7 +63,7 @@ export default class Login extends Component {
     }
 
   redirectToDashboard() {
-    this.context.router.push('dashboard')
+    this.context.router.push('dashboard/folders')
   }
 
   getUserUsername(userID) {

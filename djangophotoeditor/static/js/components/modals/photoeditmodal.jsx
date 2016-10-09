@@ -8,7 +8,6 @@ export default class PhotoEditModal extends Component {
       this.setFilter = this.setFilter.bind(this);
       this.updateFilter = this.updateFilter.bind(this);
       this.updatePhoto = this.updatePhoto.bind(this);
-      this.discardFilterChanges = this.discardFilterChanges.bind(this);
       this.handleUpdatePhoto = this.handleUpdatePhoto.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.displayFlashMessage = this.displayFlashMessage.bind(this);
@@ -20,7 +19,9 @@ export default class PhotoEditModal extends Component {
         isEdited: false,
         edited_image: '',
         title: '',
-        messageType: 'success'
+        messageType: 'success',
+        image: '',
+        editingInProcess: false
       }
     }
 
@@ -40,13 +41,14 @@ export default class PhotoEditModal extends Component {
     }
 
     setFilter(filterType) {
-      this.setState({isEdited: false})
+      this.setState({isEdited: false, editingInProcess:true});
+
       var filters = this.updateFilter(filterType);
       this.updatePhoto(this.props.photo.id, filters)
     }
 
     getImagePath(image) {
-      return '../uploads/' + image + '?' + (Math.floor(Math.random() * 1000000) + 1)
+      return image + '?' + (Math.floor(Math.random() * 1000000) + 1)
     }
 
     updatePhoto(photoId, filters, save=false, title='') {
@@ -57,7 +59,6 @@ export default class PhotoEditModal extends Component {
       data["filters"] = filters;
       if (save) {
         data["save"] = true
-        this.setState({filters: []})
       }
       if (title) {
         data["title"] = title
@@ -71,19 +72,20 @@ export default class PhotoEditModal extends Component {
         .end((err, result) => {
           if (result) {
             if (result.status === 200) {
-              this.setState({edited_image: this.getImagePath(result.body.edited_image),
+              this.setState({edited_image: this.getImagePath('../uploads/' + result.body.edited_image),
                             isEdited: true,
+                            editingInProcess: false
                 });
               if (save) {
+                this.setState({filters: [],
+                              image: this.getImagePath(result.body.image),
+                              editingInProcess: false})
+                this.props.fetchAllPhotos();
                 return this.displayFlashMessage('Photo Updated', 'success');
               }
             }
           }
         });
-    }
-
-    discardFilterChanges() {
-
     }
 
     handleFieldChange(event) {
@@ -121,14 +123,14 @@ export default class PhotoEditModal extends Component {
                />
              </Col>
              </FormGroup>
-
              <br/>
-
+             {this.state.editingInProcess ?
+             <img className="loading-image" src="../static/img/loading.gif"/> : null }
 
           <div className="image-preview-edit">
             {this.state.isEdited ?
             <img src = {this.state.edited_image} /> :
-            <img src = {this.props.photo.image} />
+            <img src = {this.state.image || this.props.photo.image} />
             }
           </div>
           <div className="edit-options">

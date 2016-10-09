@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import request from 'superagent';
 import Folder from './folder.jsx';
 import FolderModal from './modals/foldermodal.jsx';
-import { notify } from 'react-notify-toast';
+import NotifyAlert from './notifyalert.jsx';
 
 export default class NewFolder extends Component {
     constructor() {
@@ -14,9 +14,6 @@ export default class NewFolder extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.state = {
           newFolderName: '',
-          showNotification: false,
-          notificationMessage: '',
-          messageType: 'success'
         }
     }
 
@@ -52,13 +49,13 @@ export default class NewFolder extends Component {
         .end((err, result) => {
           if (result) {
             if (result.status === 201) {
-              this.context.router.push("/dashboard/folders")
-              this.setState({notificationMessage: 'Folder created sucessfully',
-                            messageType: 'success',
-                            showNotification: true})
-              return;
+              this.props.fetchFolders();
+              return this.props.displayFlashMessage("Folder created sucessfully", "success")
             }
+            var message = (("detail" in result.body) && !(result.body.detail === '')) ? result.body.detail : "Unable to create a new folder"
+            return this.props.displayFlashMessage(message, "danger")
           }
+          return this.props.displayFlashMessage("An error occured", "danger")
         });
     }
 
@@ -76,7 +73,6 @@ export default class NewFolder extends Component {
           formName="newFolderName"
           placeholder="Enter folder name"
         />
-        {this.state.showNotification ? notify.show(this.state.notificationMessage, this.state.messageType, 3000) : null}
         </div>
       );
     }
