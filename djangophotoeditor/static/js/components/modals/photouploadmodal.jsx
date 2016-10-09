@@ -99,6 +99,7 @@ export default class PhotoUploadModal extends Component{
     .then(function(result) {
       if (result.status === 201) {
         this.clearImage();
+        this.props.fetchAllPhotos();
         return this.displayFlashMessage('Succesfully uploaded', 'success');
       }
       return this.displayFlashMessage('Unable to upload. Ensure you select a valid image', 'danger')

@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { render } from 'react-dom';
 
-import Dashboard from './components/dashboard.jsx';
 import FolderDashboard from './components/folderdashboard.jsx';
 import PhotoDashboard from './components/photodashboard.jsx';
 import Home from './components/home.jsx';
@@ -13,7 +12,6 @@ const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
         <IndexRoute component={Home} history={browserHistory}/>
-        <Route path="dashboard" component={Dashboard}/>
         <Route path="dashboard/folders" component={FolderDashboard}/>
         <Route path="dashboard/photos" component={PhotoDashboard}/>
         <Route path="folder/:folderId" component={SingleFolder}/>

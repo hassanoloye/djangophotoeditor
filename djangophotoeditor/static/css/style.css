@@ -444,6 +444,14 @@ textarea {
   cursor: pointer;
 }
 
+.select-folder-photo .list-group-item a {
+  text-decoration: none;
+  color: #365029;
+}
+
+.select-folder-photo h4 {
+  margin-left: 1em;
+}
 
 .single-folder {
   font-size: 20px;
@@ -495,7 +503,8 @@ border-right: 1px solid #eee;
   position: absolute;
 }
 
-.edit-options {
+.pagination {
+  margin-left: 1em;
 }
 
 .form-control {
@@ -606,6 +615,18 @@ border-right: 1px solid #eee;
 
 .photo-name {
   margin-top: -5px
+}
+
+.notify-message {
+  margin-top: -150px;
+  margin-left: 265px;
+  margin-bottom: 130px;
+
+}
+
+.loading-image {
+  margin-left: 45%;
+  margin-top: -3%;
 }
 /**
 Before

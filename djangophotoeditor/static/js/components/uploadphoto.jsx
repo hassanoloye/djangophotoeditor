@@ -14,10 +14,6 @@ export default class UploadPhoto extends Component {
       this.setState({showUploadPhotoModal: true})
     }
 
-    handleSaveNewPhoto() {
-
-    }
-
     render() {
       let closeUploadPhotoModal = () => this.setState({ showUploadPhotoModal: false });
       return(
@@ -29,6 +25,7 @@ export default class UploadPhoto extends Component {
           onHide={closeUploadPhotoModal}
           handleFieldChange={this.handleFieldChange}
           onSave={this.handleSaveNewPhoto}
+          fetchAllPhotos={this.props.fetchAllPhotos}
         />
         </div>
       );

@@ -3,13 +3,11 @@ import Menu from './menu.jsx';
 import request from 'superagent';
 import PhotoInfoModal from './modals/photoinfomodal.jsx';
 import PhotoEditModal from './modals/photoeditmodal.jsx';
-import { DropdownButton, MenuItem, OverlayTrigger, Popover, Thumbnail } from 'react-bootstrap';
-import Notifications, { notify } from 'react-notify-toast';
+import { DropdownButton, MenuItem, OverlayTrigger, Popover, Thumbnail, Pagination } from 'react-bootstrap';
 
 export default class Photo extends Component {
   constructor() {
     super();
-    this.fetchFolderPhotos = this.fetchFolderPhotos.bind(this);
     this.fetchAllPhotos = this.fetchAllPhotos.bind(this);
     this.displayAllPhotos = this.displayAllPhotos.bind(this);
     this.displaySinglePhoto = this.displaySinglePhoto.bind(this);
@@ -17,6 +15,7 @@ export default class Photo extends Component {
     this.editPhoto = this.editPhoto.bind(this);
     this.sharePix = this.sharePix.bind(this);
     this.deletePhoto= this.deletePhoto.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.state = {
       photos: [],
       photoPaginationCount: 0,
@@ -26,16 +25,11 @@ export default class Photo extends Component {
       showDeletePopover: false,
       showNotification: false,
       notificationMessage: '',
-      messageType: 'success'
+      messageType: 'success',
+      activePage: 1
     }
   }
 
-  componentWillMount() {
-    if (this.props.folderId) {
-      return this.fetchFolderPhotos(this.props.folderId)
-    }
-    return this.fetchAllPhotos();
-  }
 
   componentDidMount() {
     (function(d, s, id){
@@ -56,7 +50,12 @@ export default class Photo extends Component {
     }
   }
 
-
+  handleSelect(eventKey) {
+    this.setState({
+      activePage: eventKey
+    });
+    this.props.fetchPhotosByPage(eventKey)
+  }
 
   fetchAllPhotos() {
     request
@@ -75,26 +74,12 @@ export default class Photo extends Component {
       });
   }
 
-  fetchFolderPhotos(folderId) {
-    request
-      .get('/api/v1/folder/'+folderId)
-      .set('Authorization', 'Bearer ' + localStorage
-            .getItem('token'))
-      .end((err, result) => {
-        if (result.status === 200) {
-          this.setState({
-            photos: result.body.photos,
-          });
-        }
-      });
-    }
-
     displayAllPhotos() {
-      if (this.state.photos.length > 0) {
+      if (this.props.photos.length > 0) {
           return (
-            this.state.photos.map((photo) => {
+            this.props.photos.map((photo) => {
               return (
-                this.displaySinglePhoto(photo, (this.state.photos.indexOf(photo)+1).toString())
+                this.displaySinglePhoto(photo, (this.props.photos.indexOf(photo)+1).toString())
               );
             })
           );
@@ -124,17 +109,13 @@ export default class Photo extends Component {
         .end((err, result) => {
           if (result) {
             if (result.status === 204) {
-              this.fetchAllPhotos();
-              this.setState({notificationMessage: 'Successfully Deleted',
-                            messageType: 'success',
-                            showNotification: true})
-              return;
+              this.props.fetchAllPhotos();
+              return this.props.displayFlashMessage('Photo successfully deleted', 'success')
             }
+            var message = (("detail" in result.body) && !(result.body.detail === '')) ? result.body.detail : "Unable to delete bucketlist"
+            return this.pros.displayFlashMessage(message, "danger")
             }
-            this.setState({notificationMessage: 'Photo Not Deleted',
-                          messageType: 'danger',
-                          showNotification: true})
-            return;
+            return this.props.displayFlashMessage("An error occured", "danger")
         });
     }
 
@@ -162,6 +143,8 @@ export default class Photo extends Component {
         <MenuItem eventKey="1" onClick={()=>this.editPhoto(photo)}>Edit</MenuItem>
         <MenuItem eventKey="2" onClick={()=>this.sharePix(photo)}>Share</MenuItem>
         <MenuItem eventKey="3" onClick={()=>this.getInfo(photo)}>Get Info</MenuItem>
+        <MenuItem eventKey="4" href={photo.image} download>Download</MenuItem>
+
         <OverlayTrigger
           trigger="click"
           container={document.body}
@@ -201,6 +184,19 @@ export default class Photo extends Component {
          {this.displayAllPhotos()}
       </div>
       </div>
+      {this.props.photos.length > 0 & !(this.props.folderId)?
+      <Pagination
+       prev
+       next
+       first
+       last
+       ellipsis
+       items={this.props.photoPaginationCount}
+       maxButtons={5}
+       activePage={this.state.activePage}
+       onSelect={this.handleSelect}
+       />
+       : null }
       </div>
       </div>
       <PhotoInfoModal
@@ -212,8 +208,8 @@ export default class Photo extends Component {
       show = {this.state.showPhotoEditModal}
       onHide={closePhotoEditModal}
       photo={this.state.photo}
+      fetchAllPhotos={this.props.fetchAllPhotos}
       />
-      {this.state.showNotification ? notify.show(this.state.notificationMessage, this.state.messageType, 3000) : null}
       </div>
     );
   }

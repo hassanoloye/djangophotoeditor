@@ -14,8 +14,10 @@ export default class NewFolderPicture extends Component {
         <div className="row">
           <div className="col-lg-3 col-md-3 col-sm-4">
             <div className="new-folder-picture">
-              <NewFolder />
-              <UploadPhoto />
+              <NewFolder
+              fetchFolders={this.props.fetchFolders}
+              displayFlashMessage={this.props.displayFlashMessage}/>
+              <UploadPhoto fetchAllPhotos={this.props.fetchAllPhotos}/>
               <hr/>
             </div>
           </div>
