@@ -493,6 +493,7 @@ border-right: 1px solid #eee;
 .all-photos .thumbnail {
   width: 200px;
   height: 200px;
+  cursor: pointer;
 }
 
 .modal-container {
@@ -544,6 +545,14 @@ border-right: 1px solid #eee;
 
 .image-preview-edit {
   text-align: center;
+}
+
+.image-view {
+  text-align: center;
+}
+
+.image-view img {
+  max-width: 900px;
 }
 
 .image-preview-edit img {
