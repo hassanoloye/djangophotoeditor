@@ -1,7 +1,7 @@
 import os
 
 from api_v1.filters import ImageEditor
-from api_v1.permissions import IsFolderOwner, IsPhotoOwner
+from api_v1.permissions import IsFolderOwner, IsPhotoFolderOwner, IsPhotoOwner
 from api_v1.serializers import PhotoSerializer
 from django.core.files import File
 from django.http import HttpResponse
@@ -42,7 +42,7 @@ class FolderPhotoView(generics.CreateAPIView):
     Create a new photo in a folder.
     """
     serializer_class = PhotoSerializer
-    permission_classes = (IsAuthenticated, IsFolderOwner, )
+    permission_classes = (IsAuthenticated, IsPhotoFolderOwner, )
 
     def perform_create(self, serializer):
         """

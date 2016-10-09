@@ -63,7 +63,7 @@ export default class Login extends Component {
     }
 
   redirectToDashboard() {
-    this.context.router.push('dashboard')
+    this.context.router.push('dashboard/folders')
   }
 
   getUserUsername(userID) {
@@ -78,6 +78,9 @@ export default class Login extends Component {
   render() {
     return (
       <div id="facebook-login">
+        <div className="app-caption">
+        Upload, Edit and Share your photos
+        </div>
         <a onClick={this.loginWithFacebook} className="btn btn-primary">
             Login with Facebook
         </a>

@@ -4,8 +4,7 @@ import Menu from './menu.jsx';
 import request from 'superagent';
 import FolderInfoModal from './modals/folderinfomodal.jsx';
 import FolderEditModal from './modals/foldereditmodal.jsx';
-import { ListGroup, ListGroupItem, DropdownButton, MenuItem, OverlayTrigger, Popover, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
-import { notify } from 'react-notify-toast';
+import { ListGroup, ListGroupItem, DropdownButton, MenuItem, OverlayTrigger, Popover, Grid, Row, Col, Thumbnail, Pagination } from 'react-bootstrap';
 
 
 export default class Folder extends Component {
@@ -18,6 +17,7 @@ export default class Folder extends Component {
     this.updateFolder = this.updateFolder.bind(this);
     this.handleEditFolder = this.handleEditFolder.bind(this);
     this.deleteFolder = this.deleteFolder.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.state = {
       folders: [],
       folder: {},
@@ -27,7 +27,8 @@ export default class Folder extends Component {
       folderId: 0,
       showNotification: false,
       notificationMessage: '',
-      messageType: 'success'
+      messageType: 'success',
+      activePage: 1
     }
   }
 
@@ -38,6 +39,13 @@ export default class Folder extends Component {
       this.setState({
           [key]: value
       });
+  }
+
+  handleSelect(eventKey) {
+    this.setState({
+      activePage: eventKey
+    });
+    this.props.fetchFoldersByPage(eventKey)
   }
 
   componentWillMount() {
@@ -66,11 +74,11 @@ export default class Folder extends Component {
   }
 
   displayAllFolders() {
-    if (this.state.folders.length > 0) {
+    if (this.props.folders.length > 0) {
         return (
-          this.state.folders.map((folder) => {
+          this.props.folders.map((folder) => {
             return (
-              this.displaySingleFolder(folder, (this.state.folders.indexOf(folder)+1).toString())
+              this.displaySingleFolder(folder, (this.props.folders.indexOf(folder)+1).toString())
             );
           })
         );
@@ -94,17 +102,13 @@ export default class Folder extends Component {
       .end((err, result) => {
         if (result) {
           if (result.status === 204) {
-            this.fetchFolders();
-            this.setState({notificationMessage: 'Successfully Deleted',
-                          messageType: 'success',
-                          showNotification: true})
-            return;
-          }
+            this.props.fetchFolders();
+            return this.props.displayFlashMessage("Folder succesfully deleted", "success")
+            }
+            var message = (("detail" in result.body) && !(result.body.detail === '')) ? result.body.detail : "Unable to delete folder"
+            return this.props.displayFlashMessage(message, "danger")
         }
-        this.setState({notificationMessage: 'Folder Not Deleted',
-                      messageType: 'danger',
-                      showNotification: true})
-        return;
+        return this.props.displayFlashMessage("An error occured", "danger")
       });
   }
 
@@ -139,18 +143,13 @@ export default class Folder extends Component {
       .end((err, result) => {
         if (result) {
           if (result.status === 200) {
-            this.fetchFolders();
-            this.setState({notificationMessage: 'Successfully Updated',
-                          messageType: 'success',
-                          showNotification: true})
-            return;
+            this.props.fetchFolders();
+            return this.props.displayFlashMessage("Folder succesfully updated", "success")
           }
+          var message = (("detail" in result.body) && !(result.body.detail === '')) ? result.body.detail : "Unable to update folder"
+          return this.props.displayFlashMessage(message, "danger")
         }
-        this.setState({notificationMessage: 'Folder not Updated',
-                      messageType: 'success',
-                      showNotification: true})
-        return;
-
+        return this.props.displayFlashMessage("An error occured", "danger")
       });
   }
 
@@ -202,6 +201,19 @@ export default class Folder extends Component {
           {this.displayAllFolders()}
           </Col>
          </Row>
+         {this.props.folders.length > 0 ?
+         <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          items={this.props.folderPaginationCount}
+          maxButtons={5}
+          activePage={this.state.activePage}
+          onSelect={this.handleSelect}
+          />
+          : null }
       </Grid>
       </div>
       <FolderEditModal

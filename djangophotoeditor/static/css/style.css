@@ -7,7 +7,7 @@ http://www.tooplate.com/view/2075-digital-team
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     position: relative;
-    background: url('/static/img/img1.png') no-repeat center center fixed;
+    background: url('/static/img/img2.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -15,6 +15,13 @@ http://www.tooplate.com/view/2075-digital-team
     height: 725px;
   }
 
+.app-caption {
+  font-family: cursive;
+  font-size: 3em;
+  margin: 1em auto;
+  margin-top: -2em;
+  color: #0097A7;
+}
 
 html, body {
      width: 100%;
@@ -423,6 +430,10 @@ textarea {
     margin-left: 40px;
 }
 
+.new-folder-picture a {
+  color: rgb(35, 19, 19);
+}
+
 .select-folder-photo {
   width: 20%;
   margin-left: 30px;
@@ -433,6 +444,14 @@ textarea {
   cursor: pointer;
 }
 
+.select-folder-photo .list-group-item a {
+  text-decoration: none;
+  color: #365029;
+}
+
+.select-folder-photo h4 {
+  margin-left: 1em;
+}
 
 .single-folder {
   font-size: 20px;
@@ -484,7 +503,8 @@ border-right: 1px solid #eee;
   position: absolute;
 }
 
-.edit-options {
+.pagination {
+  margin-left: 1em;
 }
 
 .form-control {
@@ -595,6 +615,18 @@ border-right: 1px solid #eee;
 
 .photo-name {
   margin-top: -5px
+}
+
+.notify-message {
+  margin-top: -150px;
+  margin-left: 265px;
+  margin-bottom: 130px;
+
+}
+
+.loading-image {
+  margin-left: 45%;
+  margin-top: -3%;
 }
 /**
 Before
