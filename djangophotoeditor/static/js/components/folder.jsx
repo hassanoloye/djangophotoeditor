@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Menu from './menu.jsx';
 import request from 'superagent';
 import FolderInfoModal from './modals/folderinfomodal.jsx';
 import FolderEditModal from './modals/foldereditmodal.jsx';
-import { ListGroup, ListGroupItem, DropdownButton, MenuItem, OverlayTrigger, Popover, Grid, Row, Col, Thumbnail, Pagination } from 'react-bootstrap';
+import { DropdownButton, MenuItem, OverlayTrigger, Popover, Grid, Row, Col, Thumbnail, Pagination } from 'react-bootstrap';
 
 
 export default class Folder extends Component {

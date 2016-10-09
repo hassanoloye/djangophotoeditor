@@ -1,28 +1,12 @@
 import React, { Component } from 'react';
-import Menu from './menu.jsx';
-import request from 'superagent';
-import Folder from './folder.jsx';
-import Photo from './photo.jsx';
-import {
-  ListGroup,
-  ListGroupItem
-}
-from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export default class Favorites extends Component {
   constructor() {
     super();
     this.redirectToFolderDashboard = this.redirectToFolderDashboard.bind(this);
     this.redirectToPhotoDashboard = this.redirectToPhotoDashboard.bind(this);
-    this.state = {
-      newFolderName: '',
-      showNewFolderForm: false,
-      activeKey: 1,
-      folders: [],
-      photos: [],
-      folderPaginationCount: 0,
-      photoPaginationCount: 0,
-    }
+    this.state = {}
   }
 
 
@@ -50,9 +34,9 @@ export default class Favorites extends Component {
          <a onClick={this.redirectToPhotoDashboard}>
          <span className="glyphicon glyphicon-picture">
          </span>
-            &nbsp;All Photos
-            </a>
-            </ListGroupItem>
+         &nbsp;All Photos
+         </a>
+         </ListGroupItem>
       </ListGroup>
       </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, FormControl, Modal, Carousel, Checkbox, Alert } from 'react-bootstrap';
+import { Button, Col, Form, FormGroup, FormControl, Modal, Alert } from 'react-bootstrap';
 import request from 'superagent';
 
 export default class PhotoEditModal extends Component {
@@ -12,8 +12,6 @@ export default class PhotoEditModal extends Component {
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.displayFlashMessage = this.displayFlashMessage.bind(this);
       this.state = {
-        done: false,
-        question: true,
         flashMessage: '',
         filters: [],
         isEdited: false,

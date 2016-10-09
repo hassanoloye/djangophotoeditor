@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Menu from './menu.jsx';
 import request from 'superagent';
 import PhotoInfoModal from './modals/photoinfomodal.jsx';
 import PhotoEditModal from './modals/photoeditmodal.jsx';

@@ -25,7 +25,7 @@ export default class Menu extends Component {
       <Navbar staticTop={true}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/dashboard">PhotoEditor</a>
+            <a href="/dashboard/folders">PhotoEditor</a>
           </Navbar.Brand>
         </Navbar.Header>
         <div style={this.props.menustyle}>

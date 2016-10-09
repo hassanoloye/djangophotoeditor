@@ -1,7 +1,6 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from photos.models import Folder, Photo
-from rest_framework import serializers, status
+from rest_framework import serializers
 from rest_framework.response import Response
 
 
