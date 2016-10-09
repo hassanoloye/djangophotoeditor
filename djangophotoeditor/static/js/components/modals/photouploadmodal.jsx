@@ -83,7 +83,7 @@ export default class PhotoUploadModal extends Component{
 
   sendPhotoToApi(folderId, image, title) {
     let url = '/api/v1/photo/'
-    if (!(folderId === 0)) {
+    if (folderId != '0') {
       url = '/api/v1/folder/'+folderId+'/photos'
     }
     var data = new FormData();
@@ -146,7 +146,7 @@ export default class PhotoUploadModal extends Component{
            <br/>
            <Col><strong>Folder: </strong>
            <FormControl name="folderId" componentClass="select" placeholder="Choose folder" onChange={this.handleFieldChange}>
-                <option value={0}>Base folder</option>
+                <option value={'0'}>Base folder</option>
              {this.displayFolderOptions()}
            </FormControl>
            </Col>

@@ -44,7 +44,6 @@ export default class Login extends Component {
     }
 
     setAuthenticationToken (fbAccessToken) {
-      console.log(fbAccessToken);
       request
        .post('api/v1/auth/convert-token/')
        .send({grant_type: 'convert_token',
