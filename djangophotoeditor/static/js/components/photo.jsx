@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import PhotoInfoModal from './modals/photoinfomodal.jsx';
 import PhotoEditModal from './modals/photoeditmodal.jsx';
+import PhotoViewModal from './modals/photoviewmodal.jsx';
 import { DropdownButton, MenuItem, OverlayTrigger, Popover, Thumbnail, Pagination } from 'react-bootstrap';
 
 export default class Photo extends Component {
@@ -12,6 +13,7 @@ export default class Photo extends Component {
     this.displaySinglePhoto = this.displaySinglePhoto.bind(this);
     this.getInfo =this.getInfo.bind(this);
     this.editPhoto = this.editPhoto.bind(this);
+    this.viewPhoto = this.viewPhoto.bind(this);
     this.sharePix = this.sharePix.bind(this);
     this.deletePhoto= this.deletePhoto.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -20,6 +22,7 @@ export default class Photo extends Component {
       photoPaginationCount: 0,
       showPhotoInfoModal: false,
       showPhotoEditModal: false,
+      showPhotoViewModal: false,
       photo: {},
       showDeletePopover: false,
       showNotification: false,
@@ -100,6 +103,12 @@ export default class Photo extends Component {
         photo: photoDetails})
     }
 
+    viewPhoto (photoDetails) {
+      this.setState({
+        showPhotoViewModal: true,
+        photo: photoDetails})
+    }
+
     deletePhoto(photoId) {
       if (photoId === '' || photoId === 0 || photoId === undefined) {
         return;
@@ -162,7 +171,7 @@ export default class Photo extends Component {
             <MenuItem eventKey="4" title="Delete this photo">Delete</MenuItem>
         </OverlayTrigger>
       </DropdownButton>
-      <Thumbnail src={photo.image}>
+      <Thumbnail src={photo.image} onClick={()=>this.viewPhoto(photo)}>
         <div className="photo-name">
           {photo.title}
         </div>
@@ -175,6 +184,7 @@ export default class Photo extends Component {
   render() {
     let closePhotoInfoModal = () => this.setState({showPhotoInfoModal: false})
     let closePhotoEditModal = () => this.setState({showPhotoEditModal: false})
+    let closePhotoViewModal = () => this.setState({showPhotoViewModal: false})
 
     return (
       <div>
@@ -210,6 +220,11 @@ export default class Photo extends Component {
       onHide={closePhotoEditModal}
       photo={this.state.photo}
       fetchAllPhotos={this.props.fetchAllPhotos}
+      />
+      <PhotoViewModal
+      show={this.state.showPhotoViewModal}
+      onHide={closePhotoViewModal}
+      photo={this.state.photo}
       />
       </div>
     );
