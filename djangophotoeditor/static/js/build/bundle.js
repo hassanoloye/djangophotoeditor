@@ -69,19 +69,19 @@
 
 	var _photodashboard2 = _interopRequireDefault(_photodashboard);
 
-	var _home = __webpack_require__(669);
+	var _home = __webpack_require__(670);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _main = __webpack_require__(671);
+	var _main = __webpack_require__(672);
 
 	var _main2 = _interopRequireDefault(_main);
 
-	var _singlefolder = __webpack_require__(672);
+	var _singlefolder = __webpack_require__(673);
 
 	var _singlefolder2 = _interopRequireDefault(_singlefolder);
 
-	var _singlephoto = __webpack_require__(673);
+	var _singlephoto = __webpack_require__(674);
 
 	var _singlephoto2 = _interopRequireDefault(_singlephoto);
 
@@ -69421,7 +69421,7 @@
 
 	var _photoeditmodal2 = _interopRequireDefault(_photoeditmodal);
 
-	var _photoviewmodal = __webpack_require__(674);
+	var _photoviewmodal = __webpack_require__(669);
 
 	var _photoviewmodal2 = _interopRequireDefault(_photoviewmodal);
 
@@ -69967,6 +69967,11 @@
 	  }
 
 	  _createClass(PhotoEditModal, [{
+	    key: 'componentWillUnMount',
+	    value: function componentWillUnMount() {
+	      this.setState({ image: '' });
+	    }
+	  }, {
 	    key: 'updateFilter',
 	    value: function updateFilter(filterType) {
 	      if (!this.state.filters.includes(filterType)) {
@@ -70057,7 +70062,9 @@
 	        _extends({}, this.props, { bsSize: 'large', 'aria-labelledby': 'contained-modal-title-sm' }),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal.Header,
-	          { closeButton: true },
+	          { closeButton: true, onHide: function onHide() {
+	              return _this3.setState({ image: '', isEdited: false });
+	            } },
 	          _react2.default.createElement(
 	            _reactBootstrap.Modal.Title,
 	            { id: 'contained-modal-title-sm' },
@@ -70334,6 +70341,89 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(238);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PhotoViewModal = function (_Component) {
+	  _inherits(PhotoViewModal, _Component);
+
+	  function PhotoViewModal() {
+	    _classCallCheck(this, PhotoViewModal);
+
+	    var _this = _possibleConstructorReturn(this, (PhotoViewModal.__proto__ || Object.getPrototypeOf(PhotoViewModal)).call(this));
+
+	    _this.state = {};
+	    return _this;
+	  }
+
+	  _createClass(PhotoViewModal, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Modal,
+	        _extends({}, this.props, { bsSize: 'large', 'aria-labelledby': 'contained-modal-title-sm' }),
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal.Header,
+	          { closeButton: true },
+	          _react2.default.createElement(
+	            _reactBootstrap.Modal.Title,
+	            { id: 'contained-modal-title-sm' },
+	            'Your Photo'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal.Body,
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'image-view' },
+	            _react2.default.createElement('img', { src: this.props.photo.image })
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            _reactBootstrap.Modal.Footer,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { onClick: this.props.onHide },
+	              'Close'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PhotoViewModal;
+	}(_react.Component);
+
+	exports.default = PhotoViewModal;
+
+/***/ },
+/* 670 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -70342,7 +70432,7 @@
 
 	var _menu2 = _interopRequireDefault(_menu);
 
-	var _login = __webpack_require__(670);
+	var _login = __webpack_require__(671);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -70361,7 +70451,7 @@
 	module.exports = Home;
 
 /***/ },
-/* 670 */
+/* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70502,7 +70592,7 @@
 	};
 
 /***/ },
-/* 671 */
+/* 672 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70524,7 +70614,7 @@
 	module.exports = Main;
 
 /***/ },
-/* 672 */
+/* 673 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70696,7 +70786,7 @@
 	exports.default = SingleFolder;
 
 /***/ },
-/* 673 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70790,89 +70880,6 @@
 	}(_react.Component);
 
 	exports.default = SinglePhoto;
-
-/***/ },
-/* 674 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactBootstrap = __webpack_require__(238);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PhotoViewModal = function (_Component) {
-	  _inherits(PhotoViewModal, _Component);
-
-	  function PhotoViewModal() {
-	    _classCallCheck(this, PhotoViewModal);
-
-	    var _this = _possibleConstructorReturn(this, (PhotoViewModal.__proto__ || Object.getPrototypeOf(PhotoViewModal)).call(this));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(PhotoViewModal, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _reactBootstrap.Modal,
-	        _extends({}, this.props, { bsSize: 'large', 'aria-labelledby': 'contained-modal-title-sm' }),
-	        _react2.default.createElement(
-	          _reactBootstrap.Modal.Header,
-	          { closeButton: true },
-	          _react2.default.createElement(
-	            _reactBootstrap.Modal.Title,
-	            { id: 'contained-modal-title-sm' },
-	            'Your Photo'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Modal.Body,
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'image-view' },
-	            _react2.default.createElement('img', { src: this.props.photo.image })
-	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            _reactBootstrap.Modal.Footer,
-	            null,
-	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { onClick: this.props.onHide },
-	              'Close'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return PhotoViewModal;
-	}(_react.Component);
-
-	exports.default = PhotoViewModal;
 
 /***/ }
 /******/ ]);
