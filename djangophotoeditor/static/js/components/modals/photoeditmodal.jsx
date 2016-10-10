@@ -23,6 +23,10 @@ export default class PhotoEditModal extends Component {
       }
     }
 
+    componentWillUnMount() {
+      this.setState({image: ''})
+    }
+
     updateFilter(filterType) {
       if (!(this.state.filters.includes(filterType))) {
         this.state.filters.push(filterType)
@@ -104,7 +108,7 @@ export default class PhotoEditModal extends Component {
     render() {
       return(
         <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
-          <Modal.Header closeButton>
+          <Modal.Header closeButton onHide={()=>this.setState({image: '', isEdited: false })}>
             <Modal.Title id="contained-modal-title-sm">Edit Your Photo</Modal.Title>
           </Modal.Header>
           <Modal.Body>
