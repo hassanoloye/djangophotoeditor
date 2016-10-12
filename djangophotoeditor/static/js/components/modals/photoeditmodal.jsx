@@ -121,7 +121,7 @@ export default class PhotoEditModal extends Component {
              <Col><strong>Title: </strong>
                <FormControl
                  name="title" type="text" required = {false} placeholder="Title your image"
-                 value={this.state.title || this.props.photo.title} onChange={this.handleFieldChange}
+                 value={this.state.title || this.props.photo.title  + '?' + (Math.floor(Math.random() * 1000000) + 1)} onChange={this.handleFieldChange}
                />
              </Col>
              </FormGroup>
@@ -132,7 +132,7 @@ export default class PhotoEditModal extends Component {
           <div className="image-preview-edit">
             {this.state.isEdited ?
             <img src = {this.state.edited_image} /> :
-            <img src = {this.state.image || this.props.photo.image} />
+            <img src = {this.state.image || this.props.photo.image + '?' + (Math.floor(Math.random() * 1000000) + 1)} />
             }
           </div>
           <div className="edit-options">

@@ -15,7 +15,7 @@ export default class PhotoViewModal extends Component{
         </Modal.Header>
         <Modal.Body>
         <div className="image-view">
-        <img src={this.props.photo.image} />
+        <img src={this.props.photo.image  + '?' + (Math.floor(Math.random() * 1000000) + 1)} />
         </div>
         <br/>
         <Modal.Footer>
