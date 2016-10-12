@@ -2,10 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-def get_upload_file_name(instance, filename):
-    return 'photos/user_{0}/{1}'.format(instance.uploader.id, filename)
-
-
 class Base(models.Model):
     """
     Base model inherited by other models
@@ -30,6 +26,9 @@ class Folder(Base):
 
 class Photo(Base):
     """Model for photo"""
+    def get_upload_file_name(instance, filename):
+        return 'photos/user_{0}/{1}'.format(instance.uploader.id, filename)
+
     title = models.CharField(max_length=100, null=True)
     image = models.ImageField(upload_to=get_upload_file_name, null=True)
     edited_image = models.CharField(max_length=255, null=True)
