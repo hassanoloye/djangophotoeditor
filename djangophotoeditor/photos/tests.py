@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from photos.models import Folder, Photo
+from models import Folder, Photo
 
 
 class TestFolder(TestCase):
@@ -24,14 +24,26 @@ class TestFolder(TestCase):
 
     def test_that_user_can_update_folder(self):
         """Test that users can update folder"""
+        # Assert Folder exists
+        self.assertTrue(Folder.objects.filter(name='Test Folder'))
+
+        # Update folder
         self.folder.name = 'Test Folder renamed'
         self.folder.save()
+
+        # Test folder is updated
         self.assertFalse(Folder.objects.filter(name='Test Folder'))
         self.assertTrue(Folder.objects.filter(name='Test Folder renamed'))
 
     def test_that_user_can_delete_folder(self):
         """Test that users can delete folder"""
+        # Assert Folder exists
+        self.assertTrue(Folder.objects.filter(name='Test Folder'))
+
+        # Delete folder
         self.folder.delete()
+
+        # Test folder is deleted
         self.assertFalse(Folder.objects.filter(name='Test Folder'))
 
 
@@ -71,13 +83,23 @@ class PhotoTest(TestCase):
         self.assertTrue(Photo.objects.filter(title='Test Photo'))
 
     def test_that_user_can_update_photo(self):
+        # Assert photo exists
+        self.assertTrue(Photo.objects.filter(title='Test Photo'))
 
+        # Update photo
         self.photo.title = 'Test Photo updated'
         self.photo.save()
+
+        # Test photo is updated
         self.assertFalse(Photo.objects.filter(title='Test Photo'))
         self.assertTrue(Photo.objects.filter(title='Test Photo updated'))
 
     def test_that_user_can_delete_photo(self):
+        # Assert photo exists
+        self.assertTrue(Photo.objects.filter(title='Test Photo'))
 
+        # Delete photo
         self.photo.delete()
+
+        # Test photo is deleted
         self.assertFalse(Photo.objects.filter(title='Test Photo'))

@@ -34,13 +34,6 @@ class PhotoTest(APITestCase):
         self.folder_photo_url = reverse('folder_photo_api',
                                         kwargs={'pk': folder_id})
 
-    def create_new_photo_without_folder(self):
-        response = self.client.post(photo_url,
-                                    data=new_photo_data, format='multipart')
-        photo_id = response.data.get('id')
-        self.photo_detail_url = reverse('photo_detail_api',
-                                        kwargs={'pk': photo_id})
-
     def create_new_photo_with_folder(self):
         self.create_new_folder()
         response = self.client.post(self.folder_photo_url,
