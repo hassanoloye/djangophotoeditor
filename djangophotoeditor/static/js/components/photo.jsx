@@ -171,7 +171,7 @@ export default class Photo extends Component {
             <MenuItem eventKey="4" title="Delete this photo">Delete</MenuItem>
         </OverlayTrigger>
       </DropdownButton>
-      <Thumbnail src={photo.image} onClick={()=>this.viewPhoto(photo)}>
+      <Thumbnail src={photo.image + '?' + (Math.floor(Math.random() * 1000000) + 1)} onClick={()=>this.viewPhoto(photo)}>
         <div className="photo-name">
           {photo.title}
         </div>
