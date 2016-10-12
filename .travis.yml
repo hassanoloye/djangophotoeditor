@@ -1,0 +1,22 @@
+language: python
+python:
+  - "2.7"
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - cd djangophotoeditor && python manage.py test --cover-package=api_v1
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: heroku
+  buildpack: python
+  api_key:
+    secure: 94cd9b29-bde1-44f9-b7af-d8f149c2cff7
+  strategy: git
+  app: photoedits
+  on: develop
+  run: "rake db:migrate"

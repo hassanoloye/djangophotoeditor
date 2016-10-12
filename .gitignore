@@ -1,7 +1,9 @@
 .*.sqlite3
 node_modules/
 staticfiles/
+uploads/
 cover/
 .coverage
 .coveragerc
 *.pyc
+*.env.yml
